@@ -1,0 +1,45 @@
+What is anonymous delegates?
+    The delegates pointing methds which have no name only body in inline called anonymous delegate.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+using Sytem;
+namespace AnonymousDelgates
+{
+  public delegate void Calculator(int a,int y);
+  class Program
+  {
+      static void Main(string[] args)
+      {
+         Calculator calc = delegate(int a,int b) {return a + b; }
+         calc(20,30);
+      }
+  }
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+What is lambda expressions
+      The improved feature of anonymous delegates are lambda expressions. So use lambda expression to create anonymous function.
+      => is called 'lambda declartion pointer' .
+
+Types
+      1. Expression lambda
+      2. Statement lambda
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+    static void Main(string[] args)
+    {
+          //Expression lambda
+          Func<int,int,int> ExSum = (x,y) => x + y;
+          Console.WriteLine(ExSum(20,30));
+
+          //statement lambda
+          Func<int,int,int> StSum = (x,y) =>
+          {
+              var sum = x + y;
+              return sum;
+          };
+          Console.WriteLine(sum(20,30));
+  }
+    
