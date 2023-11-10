@@ -1,0 +1,110 @@
+What is delegate?
+  A delegate is a type safe function pointer which means it points on a function.
+  If we want to pass function as parameter , we use delegates.
+
+
+Syntax 
+        [accessmodifier] delegate [return type] delegateName(Parameters);
+         public delegate void myDelegate(int x);
+
+Types
+        1. Singlecast Delegate
+        2. Multicast Delegate(extension of singlecast delegate)
+
+Properties
+          * All methods called in FIFO order.
+          * + or += is used for add methods to delegate.
+          * - or -= is ued for remove methods from delegate.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Practical usage of delegates
+
+using System;
+namespace Delegatesincsharp 
+{
+    public delegate void myDelegate(string msg); // delegate declare in outside the class
+    class Program
+    { 
+        public static void Main(string[] args) 
+        {
+
+            myDelegate obj = new myDelegate(Hello);
+            obj("Hello world");
+            //Hello("Hello world");
+        }
+        //method 1
+        public static void Hello(string msg)
+        { 
+            Console.WriteLine(msg);
+        }
+    }
+}
+
+NB: signature of the delagates matches to the signature of the function that points.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+using System;
+namespace delegatesincsharp
+{
+    class Delegates
+    {
+        public delegate void adddelegate(int a, int b); //here delegate declare inside the class
+        public delegate void subdelegate(int a, int b);
+        public static void Main(string[] args)
+        {
+            Delegates obj = new Delegates();
+            adddelegate del1 = new adddelegate(obj.sum);
+            subdelegate del2 = new subdelegate(obj.subtract);
+
+            del1.Invoke(100, 60);
+            del2.Invoke(100, 40);
+        }
+        //method 1
+        public void sum(int a, int b)
+        {
+            Console.WriteLine("Sum = " + (a + b));
+        }
+        //method 2
+        public void subtract(int a, int b)
+        {
+            Console.WriteLine("Differnce = " + (a - b));
+        }
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Multicast delegate
+
+using System;
+namespace MulticastDelegates
+{
+    class rectangle
+    {
+        public delegate void rectDelegate(double width,double height);
+        //method 1
+        public void area(double height, double width)
+        { 
+            Console.WriteLine("Area = "+ height * width);
+        }
+        //method 2
+        public void perimeter(double height, double width)
+        {
+            Console.WriteLine("Perimeter = " + 2 * (width + height));
+        }
+
+
+        public static void Main(string[] args)
+        {
+            rectangle rect = new rectangle();
+            rectDelegate rectdel = new rectDelegate(rect.area);
+            //multicast
+            rectdel += rect.perimeter;
+            rectdel.Invoke(5.6, 4.1);
+            Console.WriteLine();
+        }
+    }
+}
+
+NB: Multicast Delagate have return type - void.
+    Otherwise it throws runtime exception.
