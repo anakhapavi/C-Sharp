@@ -1,0 +1,58 @@
+What is Event?
+  Events are something that occurs in a program. Events are used to enable communication and interaction between different parts of a program in flexible manner.
+  Event allows a class or object to notify other class or object when something occurs.
+
+Publisher and Subscriber
+  For example when we click on a button it generates a event, so it is called 'publisher' and the classes that recive/handle the event is called 'subscriber'.
+
+NB: Event is an encapsulated delegate
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Event in delegate
+using System;
+namespace EventDelegate
+{
+
+    class Rectangle
+    {
+
+        //decalre delegate
+        public delegate void rectDeelgate(double height, double width);
+
+        //declare event with delegate
+        public event rectDeelgate RectEvent;
+
+        //method 1
+        public void area(double height, double width)
+        {
+            Console.WriteLine("area = " + width * height);
+            RectEvent?.Invoke(width, height);
+        }
+        public void perimeter(double height, double width)
+        {
+            Console.WriteLine("perimeter = "+ 2*(width+height));
+            RectEvent?.Invoke(width, height);
+        }
+        public static void Main(string[] args)
+        { 
+            Rectangle rect = new Rectangle();
+            rectDeelgate del = new rectDeelgate(rect.area);
+            //multicast
+            del += rect.perimeter;
+
+            //assign delegate to the event
+            rect.RectEvent += del;
+
+            //call method2 using invoke method 
+            //del.Invoke(6.2, 4.1);
+            //rect.area(6.2,4.1);
+            Console.WriteLine();
+
+
+        }
+    
+    }
+}
+
+  
