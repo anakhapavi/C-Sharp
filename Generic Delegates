@@ -1,0 +1,102 @@
+What is generic delegates?
+      The generic delegates are  1. Func Delegates
+                                 2. Action Delegates
+                                 3. Predicate Delegates
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Func Delegates
+  Func delegates reprecent a method with parameter and return value, it can take up to 16 parameters.
+
+
+using System;
+namespace GenericDelegates
+{
+  class Program
+  {
+        //Func reprecent a method taking two integers and returning their sum
+        static Func<int,int,int> add = (a,b) => a +b;
+
+        //Func reprecent a method taking a string and returing its length
+        static Func<string,int> stringLength = s => s.Length;
+
+      static void Main(string[] args)
+      {
+          //using Func delegates
+          int result1 = add(10,2);
+          int result2 = stringLength("Hello C#");
+          Console.WriteLine($"Sum: {result1}");
+          Console.WriteLine($"Length: {result2}");
+      }
+  }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Action Delegates
+    Action delegates takes parameter and does not return value(void).
+
+using System;
+namespace GenericDelegates
+{
+    class Program
+    {
+        //Action delegate taking 2 paramter and print thier sum
+        static Action<int,int> printSum = (a,b) =>
+        {
+            int c = a + b;
+            Console.WriteLine($"Sum: {s}");
+        }
+
+        //Action delegate taking a string and prints its length
+        static Action<string> stringLength = s => 
+        {
+            int length = s.Length;
+            Console.WriteLine($"Length: {length}");
+        };
+        static void Main(string[] args)
+        {
+            printsum(2,3);
+            stringLength("Hi Anakha!");
+        }
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Predicate Delegates
+      It defines set of criterias and determines whether a specified object meet those criteria.
+      It returns bool value based on criteria.
+
+using System;
+namespace GenericDelegates
+{
+  class Program
+  {
+      //Predicate check integer is greater than 10
+      static Predicate<int> GreaterNumber = number => number > 10;
+
+      //Predicate check string length is greater than 5
+      static Predicate<string> stringLength = s => s.Length > 5;
+
+    static void Main(string[] args)
+    {
+        //using Predicate delegates
+        bool result1 = GreaterNumber(5);
+        bool result2 = stringLength("Hi, How are you?);
+        Console.WriteLine($"Is it True: {result1}");
+        Console.WriteLine($"Is it True/False {result2}");
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
